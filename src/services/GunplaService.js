@@ -19,6 +19,15 @@ const entry = {
     grade: '',
     serie: ''
 }
+
+//Fetch from API localhost:8080//api/gunpla/list
+const jsonList = () => {
+    return fetch('http://localhost:8080/api/gunpla/list')
+        .then(response => response.json())
+        .then(data => data)
+        .catch(error => console.log(error));
+}
+
     
 export const list = () => {
     return initList; 
@@ -26,4 +35,8 @@ export const list = () => {
 
 export const mockEntry = () => {
     return entry;
+} 
+
+export const fetchedList = () => {
+    return jsonList();
 }
