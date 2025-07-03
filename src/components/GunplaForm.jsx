@@ -49,17 +49,18 @@ export const GunplaForm = ({ handleAddGunpla, selectedGunpla }) => {
           <div className="select" style={{ width: "100%" }}>
             <select
               style={{ width: "100%" }}
-              defaultValue={"Selecciona el Grado"}
               value={formData.grade}
               onChange={(e) =>
                 setFormData({ ...formData, grade: e.target.value })
               }
             >
-              <option disabled>Selecciona el Grado</option>
-              <option>HG</option>
-              <option>MG</option>
-              <option>PG</option>
-              <option>SD</option>
+              <option disabled value={""}>
+                Selecciona el Grado
+              </option>
+              <option value={"HG"}>HG</option>
+              <option value={"MG"}>MG</option>
+              <option value={"PG"}>PG</option>
+              <option value={"SD"}>SD</option>
             </select>
           </div>
         </div>
