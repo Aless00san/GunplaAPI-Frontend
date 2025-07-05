@@ -1,7 +1,8 @@
 import { useState } from "react";
+import axios from "axios";
 // import '../App.css'
 import { GunplaList } from "./GunplaList.jsx";
-import { list, mockEntry } from "../services/GunplaService.js";
+import { mockEntry, fetchedList } from "../services/GunplaService.js";
 import { useEffect } from "react";
 import { GunplaForm } from "./GunplaForm.jsx";
 
@@ -10,7 +11,9 @@ function App() {
   const [selectedGunpla, setSelectedGunpla] = useState(mockEntry);
 
   useEffect(() => {
-    setEntries(list());
+    axios.get("http://localhost:8080/api/gunpla/list").then((response) => {
+      setEntries(response.data);
+    });
   }, []);
 
   const handleAddGunpla = (gunpla) => {

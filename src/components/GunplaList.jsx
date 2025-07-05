@@ -1,7 +1,7 @@
 import { GunplaEntry } from "./GunplaEntry.jsx";
 import "./../style/List.css";
 
-export const GunplaList = ({ entries = [], handleDelete, handleSelect }) => {
+export const GunplaList = ({ entries, handleDelete, handleSelect }) => {
   return (
     <div>
       <table className="table">

@@ -1,15 +1,18 @@
+import { GunplaDTOFromEntry } from "../Model/GunplaDTO.js";
+
 export const GunplaEntry = ({ entry, handleDelete, handleSelect }) => {
+  const GunplaDTO = GunplaDTOFromEntry(entry);
   return (
     <>
       <tr className="selectable">
-        <td>{entry.id}</td>
-        <td>{entry.name}</td>
-        <td>{entry.grade}</td>
-        <td>{entry.serie}</td>
+        <td>{GunplaDTO.id}</td>
+        <td>{GunplaDTO.name}</td>
+        <td>{GunplaDTO.grade}</td>
+        <td>{GunplaDTO.series}</td>
         <td>
           <button
             className="button is-primary"
-            onClick={() => handleSelect(entry)}
+            onClick={() => handleSelect(GunplaDTO)}
           >
             Seleccionar
           </button>
