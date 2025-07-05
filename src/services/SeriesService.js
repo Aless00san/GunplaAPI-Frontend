@@ -1,15 +1,20 @@
-//Service with a mock list and a function to fetch from API
-import axios from "axios";
+//This service will handle API calls to series endpoint
+import axios from 'axios';
 
-const API_URL = "http://localhost:8080/api/series";
-export const SeriesService = {
-  list: [
-    { id: 1, name: "Seed", fullName: "Seed" },
-    { id: 2, name: "Seed Astray", fullName: "Seed Astray" },
-  ],
-};
-
+const API_URL = 'http://localhost:8080/api/series';
 
 export const seriesList = () => {
-  return axios.get(API_URL + "/list")
+  return axios.get(API_URL + '/list');
+};
+
+export const seriesByName = async name => {
+  try {
+    const series = await seriesList();
+    if (series) {
+      return series.data.find(s => s.name === name);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return undefined;
 };

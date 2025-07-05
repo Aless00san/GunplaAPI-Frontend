@@ -1,16 +1,21 @@
-import axios from "axios";
+//This service will handle API calls to grade endpoint
 
-//Service with a mock list and a function to fetch from API
-const API_URL = "http://localhost:8080/api/grade";
-export const GradeService = {
-  list: [
-    { id: 1, name: "HG", fullName: "High Grade" },
-    { id: 2, name: "MG", fullName: "Master Grade" },
-    { id: 3, name: "PG", fullName: "Perfect Grade" },
-    { id: 4, name: "SD", fullName: "Super Deformed" },
-  ],
-};
+import axios from 'axios';
+
+const API_URL = 'http://localhost:8080/api/grade';
 
 export const gradeList = () => {
-  return axios.get(API_URL + "/list")
+  return axios.get(API_URL + '/list');
+};
+
+export const gradeByName = async name => {
+  try {
+    const grades = await gradeList();
+    if (grades) {
+      return grades.data.find(g => g.name === name);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return undefined;
 };

@@ -1,48 +1,55 @@
-import axios from "axios";
+//This service will handle API calls to gunpla endpoint
 
-const API_URL = "http://localhost:8080/api/gunpla";
+import axios from 'axios';
 
-const initList = [
-  {
-    id: 1,
-    name: "M1 Astray",
-    grade: "HG",
-    series: "Seed",
-  },
-  {
-    id: 2,
-    name: "Astray Red Frame",
-    grade: "HG",
-    series: "Seed Astray",
-  },
-];
+const API_URL = 'http://localhost:8080/api/gunpla';
 
 const entry = {
   id: 0,
-  name: "",
-  grade: "",
-  series: "",
+  name: '',
+  grade: '',
+  series: '',
 };
 
 //Fetch from API localhost:8080//api/gunpla/list
-const jsonList = async () => {
+export const jsonList = async () => {
   try {
-    const response = await axios.get(API_URL + "/list");
+    const response = await axios.get(API_URL + '/list');
     return response.data;
   } catch (error) {
     console.log(error);
   }
-  return [{ id: 0, name: "", grade: "", serie: "" }];
-};
-
-export const list = () => {
-  return initList;
+  return [{ id: 0, name: '', grade: '', serie: '' }];
 };
 
 export const mockEntry = () => {
   return entry;
 };
 
-export const fetchedList = () => {
-  return jsonList();
+export const gunplaList = () => {
+  return axios.get(API_URL + '/list');
+};
+
+const token = 'JWT_TOKEN_GOES_HERE';
+
+export const create = async ({ name, grade, series }) => {
+  try {
+    const response = await axios.post(
+      'http://localhost:8080/api/gunpla',
+      {
+        name,
+        grade,
+        series,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+  return undefined;
 };
