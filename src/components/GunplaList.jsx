@@ -1,5 +1,5 @@
 import { GunplaEntry } from "./GunplaEntry.jsx";
-import "./../style/List.css";
+import "./../style/gunpladb.css";
 
 export const GunplaList = ({ entries, handleDelete, handleSelect }) => {
   return (
