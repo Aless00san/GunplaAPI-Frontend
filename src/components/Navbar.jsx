@@ -9,7 +9,7 @@ import './../style/gunpladb.css';
 import { LoginModal } from './LoginModal.jsx';
 import { RegisterModal } from './RegisterModal.jsx';
 
-export const Navbar = ({ isLogged, setIsLogged, setUsername, setIsAuth }) => {
+export const Navbar = ({ isLogged, setIsLogged, setUsername }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
@@ -44,7 +44,6 @@ export const Navbar = ({ isLogged, setIsLogged, setUsername, setIsAuth }) => {
           showModal={showLoginModal}
           onClose={() => setShowLoginModal(false)}
           handleLogin={handleLogin}
-          setIsAuth={setIsAuth}
         />
       )}
       {showRegisterModal && (
