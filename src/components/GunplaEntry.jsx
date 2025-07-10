@@ -1,6 +1,11 @@
 import { GunplaDTOFromEntry } from '../Model/GunplaDTO.js';
 
-export const GunplaEntry = ({ entry, handleDelete, handleSelect }) => {
+export const GunplaEntry = ({
+  entry,
+  handleDelete,
+  handleSelect,
+  isLogged,
+}) => {
   const GunplaDTO = GunplaDTOFromEntry(entry);
   return (
     <>
@@ -11,8 +16,9 @@ export const GunplaEntry = ({ entry, handleDelete, handleSelect }) => {
         <td>{GunplaDTO.series}</td>
         <td>
           <button
-            className='button is-primary'
+            className='button is-info'
             onClick={() => handleSelect(GunplaDTO)}
+            disabled={!isLogged}
           >
             Editar
           </button>
@@ -21,6 +27,7 @@ export const GunplaEntry = ({ entry, handleDelete, handleSelect }) => {
           <button
             className='button is-danger'
             onClick={() => handleDelete(entry)}
+            disabled={!isLogged}
           >
             Eliminar
           </button>

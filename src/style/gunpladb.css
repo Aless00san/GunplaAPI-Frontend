@@ -1,17 +1,18 @@
 .selectable {
-    background-color: rgba(120, 120, 120, 0.2);
+  background-color: rgba(120, 120, 120, 0.2);
 }
 
 .nav {
-   width: 100%;
+  width: 100%;
 }
 
 .clickable {
-    cursor: pointer;
+  cursor: pointer;
+  color: black;
 }
 
-.clickable:hover{
-    transition: 0.3s;
-    color: blue;
-    size: 110%;
+.clickable:hover {
+  transition: 0.3s;
+  color: blue;
+  scale: 103%;
 }

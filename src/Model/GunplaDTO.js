@@ -10,7 +10,6 @@ export const GunplaDTO = {
 };
 
 export function GunplaDTOFromEntry(entry) {
-  console.log('GunplaDTOFromEntry', entry);
   if (entry.grade.name != undefined) {
     return {
       id: entry.id,

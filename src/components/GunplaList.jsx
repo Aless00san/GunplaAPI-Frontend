@@ -1,10 +1,15 @@
-import { GunplaEntry } from "./GunplaEntry.jsx";
-import "./../style/gunpladb.css";
+import { GunplaEntry } from './GunplaEntry.jsx';
+import './../style/gunpladb.css';
 
-export const GunplaList = ({ entries, handleDelete, handleSelect }) => {
+export const GunplaList = ({
+  entries,
+  handleDelete,
+  handleSelect,
+  isLogged,
+}) => {
   return (
     <div>
-      <table className="table">
+      <table className='table'>
         <thead>
           <tr>
             <th>ID</th>
@@ -15,13 +20,14 @@ export const GunplaList = ({ entries, handleDelete, handleSelect }) => {
           </tr>
         </thead>
         <tbody>
-          {entries.map((entry) => {
+          {entries.map(entry => {
             return (
               <GunplaEntry
                 key={entry.id}
                 entry={entry}
                 handleDelete={handleDelete}
                 handleSelect={handleSelect}
+                isLogged={isLogged}
               ></GunplaEntry>
             );
           })}
