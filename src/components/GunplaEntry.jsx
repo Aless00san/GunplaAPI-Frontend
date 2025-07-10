@@ -5,8 +5,16 @@ export const GunplaEntry = ({
   handleDelete,
   handleSelect,
   isLogged,
+  hasRole,
 }) => {
   const GunplaDTO = GunplaDTOFromEntry(entry);
+
+  const dropEntry = entry => {
+    if (hasRole('ROLE_ADMIN')) {
+      handleDelete(entry);
+    }
+  };
+
   return (
     <>
       <tr className='selectable'>
@@ -26,8 +34,8 @@ export const GunplaEntry = ({
         <td>
           <button
             className='button is-danger'
-            onClick={() => handleDelete(entry)}
-            disabled={!isLogged}
+            onClick={() => dropEntry(entry)}
+            disabled={!isLogged || !hasRole('ROLE_ADMIN')}
           >
             Eliminar
           </button>

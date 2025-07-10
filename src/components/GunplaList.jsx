@@ -6,6 +6,7 @@ export const GunplaList = ({
   handleDelete,
   handleSelect,
   isLogged,
+  hasRole,
 }) => {
   return (
     <div>
@@ -28,6 +29,7 @@ export const GunplaList = ({
                 handleDelete={handleDelete}
                 handleSelect={handleSelect}
                 isLogged={isLogged}
+                hasRole={hasRole}
               ></GunplaEntry>
             );
           })}

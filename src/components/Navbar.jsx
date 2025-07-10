@@ -1,9 +1,4 @@
-import {
-  login,
-  logout,
-  isAuthenticated,
-  getRoles,
-} from '../services/AuthService.js';
+import { login, logout } from '../services/AuthService.js';
 import { useState, useEffect } from 'react';
 import './../style/gunpladb.css';
 import { LoginModal } from './LoginModal.jsx';
@@ -63,7 +58,7 @@ export const Navbar = ({ isLogged, setIsLogged, setUsername }) => {
           className='navbar-menu'
         >
           <div className='navbar-start'>
-            <a className='navbar-item'>Home</a>
+            <a className='navbar-item'>Inicio</a>
           </div>
 
           <div className='navbar-end'>

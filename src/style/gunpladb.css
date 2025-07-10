@@ -16,3 +16,21 @@
   color: blue;
   scale: 103%;
 }
+
+.role-tag {
+  padding: 0.2rem;
+  margin-right: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: black;
+}
+
+.role-tag.ROLE_ADMIN {
+  background-color: var(--bulma-danger);
+}
+
+.role-tag.ROLE_USER {
+  background-color: var(--bulma-info);
+}

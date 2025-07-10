@@ -11,7 +11,6 @@ import { getRoles, isAuthenticated } from '../services/AuthService.js';
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
   const [username, setUsername] = useState('');
   const [entries, setEntries] = useState([]);
   const [roles, setRoles] = useState([]);
@@ -20,11 +19,6 @@ function App() {
   const fetchEntries = async () => {
     const response = await gunplaList();
     setEntries(response.data);
-  };
-
-  const fetchRoles = async () => {
-    const response = await getRoles(username);
-    setRoles(response.data.map(r => r.name));
   };
 
   useEffect(() => {
@@ -96,6 +90,10 @@ function App() {
     setSelectedGunpla(gunpla);
   };
 
+  const hasRole = role => {
+    return roles.includes(role);
+  };
+
   return (
     <>
       <Navbar
@@ -109,7 +107,16 @@ function App() {
       >
         <p className='title'>GunplaDB</p>
         {isLogged ? (
-          <>Roles: {roles.join(', ')}</>
+          <div>
+            {roles.map(role => (
+              <span
+                key={role}
+                className={`role-tag ${role}`}
+              >
+                {role + ' '}
+              </span>
+            ))}
+          </div>
         ) : (
           <p>Por favor inicia sesión para acceder a las funcionalidades</p>
         )}
@@ -123,6 +130,7 @@ function App() {
           handleDelete={handleDeleteGunpla}
           handleSelect={handleSelectGunpla}
           isLogged={isLogged}
+          hasRole={hasRole}
         ></GunplaList>
       </div>
     </>
