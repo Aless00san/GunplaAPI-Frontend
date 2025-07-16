@@ -44,12 +44,15 @@ export const isAuthenticated = async () => {
 };
 
 export const getRoles = u => {
-  let roles = undefined;
+  let roles = [];
   if (username != '') {
     roles = api.get(`/api/user/roles/${username}`, {
       withCredentials: true,
     });
   } else {
+    if (u == '') {
+      return undefined;
+    }
     roles = api.get(`/api/user/roles/${u}`, {
       withCredentials: true,
     });

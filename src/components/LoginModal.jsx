@@ -37,6 +37,7 @@ export const LoginModal = ({ showModal, onClose, handleLogin, setIsAuth }) => {
                       className='input'
                       type='text'
                       placeholder='Usuario'
+                      autoComplete='username'
                       onChange={e =>
                         setLogin({ ...login, username: e.target.value })
                       }
@@ -50,6 +51,7 @@ export const LoginModal = ({ showModal, onClose, handleLogin, setIsAuth }) => {
                       className='input'
                       type='password'
                       placeholder='Contraseña'
+                      autoComplete='current-password'
                       onChange={e =>
                         setLogin({ ...login, password: e.target.value })
                       }

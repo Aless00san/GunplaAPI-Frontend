@@ -36,15 +36,13 @@ function App() {
         console.log('roles', roles);
       }
     };
-    if (username) {
-      fetchRoles();
-    }
+
+    fetchRoles();
   }, [isLogged]);
 
   useEffect(() => {
     const checkAuth = async () => {
       const response = await isAuthenticated();
-      console.log('auth', response);
       if (response != undefined) {
         setRoles(response.data.roles);
         if (response.status === 200) {
@@ -91,6 +89,9 @@ function App() {
   };
 
   const hasRole = role => {
+    if (roles == undefined) {
+      return false;
+    }
     return roles.includes(role);
   };
 
@@ -106,16 +107,23 @@ function App() {
         className='content'
       >
         <p className='title'>GunplaDB</p>
+
         {isLogged ? (
           <div>
-            {roles.map(role => (
-              <span
-                key={role}
-                className={`role-tag ${role}`}
-              >
-                {role + ' '}
-              </span>
-            ))}
+            {roles == undefined ? (
+              <p>Cargando roles...</p>
+            ) : (
+              <div>
+                {roles.map(role => (
+                  <span
+                    key={role}
+                    className={`role-tag ${role}`}
+                  >
+                    {role + ' '}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         ) : (
           <p>Por favor inicia sesión para acceder a las funcionalidades</p>
