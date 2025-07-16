@@ -1,5 +1,5 @@
-import { login, logout } from '../services/AuthService.js';
-import { useState, useEffect } from 'react';
+import { login, logout, register } from '../services/AuthService.js';
+import { useState } from 'react';
 import './../style/gunpladb.css';
 import { LoginModal } from './LoginModal.jsx';
 import { RegisterModal } from './RegisterModal.jsx';
@@ -9,7 +9,13 @@ export const Navbar = ({ isLogged, setIsLogged, setUsername }) => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const handleRegister = ({ username, password, email }) => {
-    console.log('registered', username, password, email);
+    register(username, password, email).then(response => {
+      if (response.status === 200) {
+        setUsername(username);
+        setIsLogged(true);
+        setShowRegisterModal(false);
+      }
+    });
   };
 
   const handleLogin = ({ username, password }) => {

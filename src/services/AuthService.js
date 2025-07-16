@@ -59,3 +59,16 @@ export const getRoles = u => {
   }
   return roles;
 };
+
+export const register = async (username, password) => {
+  try {
+    const response = await api.post('api/user/register', {
+      username,
+      password,
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+  return undefined;
+};
