@@ -1,44 +1,50 @@
-import { useState } from 'react';
-import { Navbar } from './Navbar.jsx';
-// import '../App.css'
-import { useEffect } from 'react';
-import { GunplaFromDTO } from '../Model/GunplaDTO.js';
-import { create, gunplaList, update } from '../services/GunplaService.js';
-import { GunplaForm } from './GunplaForm.jsx';
-import { GunplaList } from './GunplaList.jsx';
-
-import { getRoles, isAuthenticated } from '../services/AuthService.js';
+import { useState, useEffect } from "react";
+import { Navbar } from "./Navbar.jsx";
+import { GunplaFromDTO } from "../Model/GunplaDTO.js";
+import { create, deleteGunpla, update } from "../services/GunplaService.js";
+import { GunplaForm } from "./GunplaForm.jsx";
+import { GunplaList } from "./GunplaList.jsx";
+import { getRoles, isAuthenticated } from "../services/AuthService.js";
+import usePagination from "../hooks/usePagination.js";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
-  const [username, setUsername] = useState('');
-  const [entries, setEntries] = useState([]);
+  const [username, setUsername] = useState("");
   const [roles, setRoles] = useState([]);
   const [selectedGunpla, setSelectedGunpla] = useState(null);
 
-  const fetchEntries = async () => {
-    const response = await gunplaList();
-    setEntries(response.data);
-  };
-
-  useEffect(() => {
-    fetchEntries();
-  }, [isLogged]);
+  // Data for pagination custom hook
+  const {
+    data: entries,
+    currentPage,
+    totalPages,
+    totalElements,
+    loading,
+    error,
+    nextPage,
+    prevPage,
+    firstPage,
+    hasNext,
+    hasPrev,
+    refresh,
+  } = usePagination(3);
 
   useEffect(() => {
     const fetchRoles = async () => {
       try {
         const response = await getRoles(username);
-        setRoles(response.data.map(r => r.name));
+        setRoles(response.data.map((r) => r.name));
       } catch (err) {
         console.log(err);
       } finally {
-        console.log('roles', roles);
+        console.log("roles", roles);
       }
     };
 
-    fetchRoles();
-  }, [isLogged]);
+    if (isLogged) {
+      fetchRoles();
+    }
+  }, [isLogged, username]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -55,40 +61,39 @@ function App() {
     checkAuth();
   }, []);
 
-  const handleAddGunpla = async gunpla => {
+  const handleAddGunpla = async (gunpla) => {
     if (gunpla.id != 0) {
-      setEntries(
-        entries.map(g => {
-          if (g.id === gunpla.id) {
-            GunplaFromDTO(gunpla).then(g => {
-              update(gunpla.id, g);
-            });
-            return { ...gunpla };
-          }
-          return g;
-        })
-      );
+      // Update existing gunpla
+      try {
+        const convertedGunpla = await GunplaFromDTO(gunpla);
+        await update(gunpla.id, convertedGunpla);
+        refresh();
+      } catch (error) {
+        console.error("Error updating gunpla:", error);
+      }
     } else {
-      GunplaFromDTO(gunpla).then(async g => {
-        const response = await create(g);
-        setEntries([...entries, { ...response.data }]);
-      });
+      // Create new gunpla
+      try {
+        const convertedGunpla = await GunplaFromDTO(gunpla);
+        const response = await create(convertedGunpla);
+        refresh();
+      } catch (error) {
+        console.error("Error creating gunpla:", error);
+      }
     }
   };
 
-  const handleDeleteGunpla = gunpla => {
-    setEntries(
-      entries.filter(g => {
-        return g.id !== gunpla.id;
-      })
-    );
+  const handleDeleteGunpla = async (gunpla) => {
+    await deleteGunpla(gunpla.id);
+    firstPage();
+    refresh();
   };
 
-  const handleSelectGunpla = gunpla => {
+  const handleSelectGunpla = (gunpla) => {
     setSelectedGunpla(gunpla);
   };
 
-  const hasRole = role => {
+  const hasRole = (role) => {
     if (roles == undefined) {
       return false;
     }
@@ -102,11 +107,8 @@ function App() {
         setIsLogged={setIsLogged}
         setUsername={setUsername}
       />
-      <div
-        id='root'
-        className='content'
-      >
-        <p className='title'>GunplaDB</p>
+      <div id="root" className="content">
+        <p className="title">GunplaDB</p>
 
         {isLogged ? (
           <div>
@@ -114,12 +116,9 @@ function App() {
               <p>Cargando roles...</p>
             ) : (
               <div>
-                {roles.map(role => (
-                  <span
-                    key={role}
-                    className={`role-tag ${role}`}
-                  >
-                    {role + ' '}
+                {roles.map((role) => (
+                  <span key={role} className={`role-tag ${role}`}>
+                    {role + " "}
                   </span>
                 ))}
               </div>
@@ -128,18 +127,46 @@ function App() {
         ) : (
           <p>Por favor inicia sesión para acceder a las funcionalidades</p>
         )}
+
         <GunplaForm
           handleAddGunpla={handleAddGunpla}
           selectedGunpla={selectedGunpla}
           isLogged={isLogged}
         />
+
+        {loading && <p>Cargando gunplas...</p>}
+        {error && <p className="message is-danger">Error al cargar gunplas: {error}</p>}
+
         <GunplaList
           entries={entries}
           handleDelete={handleDeleteGunpla}
           handleSelect={handleSelectGunpla}
           isLogged={isLogged}
           hasRole={hasRole}
-        ></GunplaList>
+        />
+
+        {/* Pagination controls TODO: Separate component*/}
+        {totalPages > 1 && (
+          <div className="pagination-controls has-text-centered">
+            <div className="columns is-centered">
+              <div className="column">
+                <button onClick={prevPage} disabled={!hasPrev}>
+                  Anterior
+                </button>
+              </div>
+              <div className="column">
+                <span>
+                  Página {currentPage + 1} de {totalPages}
+                </span>
+              </div>
+              <div className="column ">
+                <button onClick={nextPage} disabled={!hasNext}>
+                  Siguiente
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
