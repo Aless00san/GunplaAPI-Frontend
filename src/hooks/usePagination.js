@@ -25,7 +25,7 @@ const usePagination = (pageSize = 10) => {
       setData(result.content);
       setTotalPages(result.totalPages);
       setTotalElements(result.totalElements);
-      setCurrentPage(result.number); 
+      setCurrentPage(result.number); // This is 0-based from Spring
     } catch (err) {
       setError(err.message);
       console.error('Error fetching data:', err);
