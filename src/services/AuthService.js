@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/';
+const API_URL = 'http://www.gunpladb.site/';
 const username = '';
 
 export const api = axios.create({

@@ -1,7 +1,7 @@
 //This service will handle API calls to series endpoint
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/series';
+const API_URL = 'http://www.gunpladb.site/api/series';
 
 export const seriesList = () => {
   return axios.get(API_URL + '/list');
