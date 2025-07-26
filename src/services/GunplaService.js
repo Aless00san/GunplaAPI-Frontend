@@ -23,7 +23,7 @@ export const gunplaList = (page = 0, size = 1000) => {
 export const create = async ({ name, grade, series }) => {
   try {
     const response = await axios.post(
-      'http://localhost:8080/api/gunpla',
+      'https://www.gunpladb.site/api/gunpla',
       {
         name,
         grade,
@@ -43,7 +43,7 @@ export const create = async ({ name, grade, series }) => {
 export const update = async (id, gunpla) => {
   try {
     const response = await axios.put(
-      `http://localhost:8080/api/gunpla/${encodeURIComponent(id)}`,
+      `https://www.gunpladb.site/api/gunpla/${encodeURIComponent(id)}`,
       {
         name: gunpla.name,
         grade: gunpla.grade,
@@ -64,7 +64,7 @@ export const update = async (id, gunpla) => {
 export const deleteGunpla = async id => {
   try {
     const response = await axios.delete(
-      `http://localhost:8080/api/gunpla/${encodeURIComponent(id)}`,
+      `https://www.gunpladb.site/api/gunpla/${encodeURIComponent(id)}`,
       {
         withCredentials: true,
       }
