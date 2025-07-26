@@ -63,23 +63,25 @@ function App() {
 
   const handleAddGunpla = async gunpla => {
     console.log('gunpla', gunpla);
-    if (gunpla.id != 0) {
-      // Update existing gunpla
-      try {
-        const convertedGunpla = await GunplaFromDTO(gunpla);
-        await update(gunpla.id, convertedGunpla);
-        refresh();
-      } catch (error) {
-        console.error('Error updating gunpla:', error);
-      }
-    } else {
-      // Create new gunpla
-      try {
-        const convertedGunpla = await GunplaFromDTO(gunpla);
-        const response = await create(convertedGunpla);
-        refresh();
-      } catch (error) {
-        console.error('Error creating gunpla:', error);
+    if (gunpla != undefined) {
+      if (gunpla.id != 0) {
+        // Update existing gunpla
+        try {
+          const convertedGunpla = await GunplaFromDTO(gunpla);
+          await update(gunpla.id, convertedGunpla);
+          refresh();
+        } catch (error) {
+          console.error('Error updating gunpla:', error);
+        }
+      } else {
+        // Create new gunpla
+        try {
+          const convertedGunpla = await GunplaFromDTO(gunpla);
+          const response = await create(convertedGunpla);
+          refresh();
+        } catch (error) {
+          console.error('Error creating gunpla:', error);
+        }
       }
     }
   };
