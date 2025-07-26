@@ -48,6 +48,7 @@ export const GunplaForm = ({ handleAddGunpla, selectedGunpla, isLogged }) => {
               return;
             }
 
+            console.log('formData', formData);
             handleAddGunpla(formData);
             setFormData(initialData);
           }}

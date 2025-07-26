@@ -19,7 +19,6 @@ function App() {
     data: entries,
     currentPage,
     totalPages,
-    totalElements,
     loading,
     error,
     nextPage,
