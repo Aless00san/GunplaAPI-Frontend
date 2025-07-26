@@ -53,7 +53,6 @@ export const update = async (id, gunpla) => {
         withCredentials: true,
       }
     );
-    console.log('Gunpla updated', response);
     return response;
   } catch (error) {
     console.log(error);

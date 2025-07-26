@@ -43,12 +43,10 @@ export const GunplaForm = ({ handleAddGunpla, selectedGunpla, isLogged }) => {
             e.preventDefault();
 
             if (!formData.name || !formData.grade || !formData.series) {
-              console.log('campos:', formData);
               alert('Todos los campos son requeridos');
               return;
             }
 
-            console.log('formData', formData);
             handleAddGunpla(formData);
             setFormData(initialData);
           }}

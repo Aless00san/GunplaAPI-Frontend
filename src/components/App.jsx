@@ -62,7 +62,6 @@ function App() {
   }, []);
 
   const handleAddGunpla = async gunpla => {
-    console.log('gunpla', gunpla);
     if (gunpla != undefined) {
       if (gunpla.id != 0) {
         // Update existing gunpla
