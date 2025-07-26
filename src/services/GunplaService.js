@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { api } from './AuthService';
 
-const API_URL = 'http://www.gunpladb.site/api/gunpla';
+const API_URL = 'https://www.gunpladb.site/api/gunpla';
 
 const entry = {
   id: 0,

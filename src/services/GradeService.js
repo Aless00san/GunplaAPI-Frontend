@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://www.gunpladb.site/api/grade';
+const API_URL = 'https://www.gunpladb.site/api/grade';
 
 export const gradeList = () => {
   return axios.get(API_URL + '/list');
