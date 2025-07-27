@@ -14,7 +14,7 @@ The frontend fetches data from the API that needs direct acces to the database, 
 # Deploying a local version
 ## What do you need?
 1. Your own data source
-   - [Information on how to host your own backend](https://github.com/Aless00san/Gunpla-API)
+   - [Information on how to host your own backend](https://github.com/Aless00san/Gunpla-API#run-locally)
 2. pnpm 9.12 or higher
 3. Node.js 24.4 or higher
 
