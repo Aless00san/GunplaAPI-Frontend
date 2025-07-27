@@ -33,7 +33,7 @@ pnpm run dev
 ```
 It should start on http://localhost:5173 and you should see an error if you haven't touched anything yet, that's because the default backend implementation won't work on your machine, that's why you'll need your own datasource
 
-## Stack:
+# Stack:
 
 <div style="background-color:#ff0000; padding:20px; border-radius:5px; display: flex; align-items: center; justify-content: center;">
   <a href="https://react.dev/" target="_blank" style="margin-right: 10px;">
