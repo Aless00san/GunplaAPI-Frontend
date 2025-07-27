@@ -35,9 +35,16 @@ It should start on http://localhost:5173 and you should see an error if you have
 
 ## Stack:
 
-<div style="background-color:#ff0000; padding:20px; border-radius:5px;">
-  <img src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" alt="React Logo" style="margin-right:10px;">
-  <img src="https://www.vectorlogo.zone/logos/axios/axios-icon.svg" alt="Axios Logo"  style="margin-right:10px;">
-  <img src="https://bulma.io/assets/brand/Bulma%20Icon.svg" alt="Bulma CSS Logo" width="50" height="50" style="margin-right:10px;">
+<div style="background-color:#ff0000; padding:20px; border-radius:5px; display: flex; align-items: center; justify-content: center;">
+  <a href="https://react.dev/" target="_blank" style="margin-right: 10px;">
+    <img src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" alt="React Logo" width="50" height="50">
+  </a>
+  <a href="https://axios-http.com/" target="_blank" style="margin-right: 10px;">
+    <img src="https://www.vectorlogo.zone/logos/axios/axios-icon.svg" alt="Axios Logo" width="50" height="50">
+  </a>
+  <a href="https://bulma.io/" target="_blank" style="margin-right: 10px;">
+    <img src="https://bulma.io/assets/brand/Bulma%20Icon.svg" alt="Bulma CSS Logo" width="50" height="50">
+  </a>
 </div>
+
 
